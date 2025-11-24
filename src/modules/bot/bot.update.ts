@@ -1970,7 +1970,7 @@ export class BotUpdate {
             return result;
         }, 0)//+= p.product.price * p.amount;
 
-        if (priceAll > 40_000) {
+        if (priceAll >= 40_000) {
             await alertToUserAboutNotWorking(ctx);
 
             userAction.set(chatId, {
@@ -3247,7 +3247,7 @@ async function addOrRemoveAdminChatId(ctx: Context, userService: UserService) {
 }
 
 async function alertToUserAboutNotWorking(ctx: Context) {
-    if (isworkTime) {
+    if (!isworkTime) {
         await ctx.answerCbQuery(
             reasonOfPause,
             { show_alert: false }
@@ -3256,7 +3256,7 @@ async function alertToUserAboutNotWorking(ctx: Context) {
 }
 
 async function alertToUserAboutNotWorkingOk(ctx: Context) {
-    if (isworkTime) {
+    if (!isworkTime) {
         await ctx.answerCbQuery(
             reasonOfPause,
             { show_alert: true }
