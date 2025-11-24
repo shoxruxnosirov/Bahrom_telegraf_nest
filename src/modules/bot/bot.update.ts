@@ -1978,7 +1978,7 @@ export class BotUpdate {
                 // productId: +productId,
                 method: 'getContact'
             });
-            
+
             await ctx.editMessageMedia(
                 {
                     type: 'photo',   // media turi majburiy!
@@ -2017,7 +2017,7 @@ export class BotUpdate {
             console.log('chatId aniqlanmadi');
             return;
         }
-        
+
         userAction.set(chatId, {
             chatId,
             // productId: +productId,
@@ -3431,16 +3431,32 @@ async function productId(ctx: Context, productService: ProductService, is_edit: 
 async function clearChat(chatId: number, ctx: Context) {
     const message_id = messageId_chatId.get(chatId);
     if (message_id) {
-        await ctx.deleteMessage(message_id);
+        // await ctx.deleteMessage(message_id);
+        await safeDelete(ctx, message_id);
     }
 
     const basket = baskets.get(chatId);
 
     basket?.forEach(async p => {
         if (p.message_id) {
-            await ctx.deleteMessage(p.message_id);
+            // await ctx.deleteMessage(p.message_id);
+            await safeDelete(ctx, p.message_id);
             delete p.message_id;
         }
     });
+}
+
+async function safeDelete(ctx: Context, messageId: number) {
+    try {
+        // await ctx.telegram.deleteMessage(chatId, messageId);
+        await ctx.deleteMessage(messageId);
+    } catch (e) {
+        // Ignore if message not found
+        if (e.description?.includes('message to delete not found')) {
+            console.log('Message already deleted or not found:', messageId);
+        } else {
+            console.error('Delete error:', e);
+        }
+    }
 }
 
