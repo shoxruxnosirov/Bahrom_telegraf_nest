@@ -134,18 +134,18 @@ export class BotUpdate {
                     ]
 
                 ]
-                if (priceAll >= 40000) {
-                    buttons.push(
-                        [
-                            Markup.button.callback('🚚 𝗬𝗘𝗧𝗞𝗔𝗭𝗜𝗕 𝗕𝗘𝗥𝗜𝗦𝗛', `userProductsBuyGetContact`)
-                        ]
-                    )
-                }
+                // if (priceAll >= 40000) {
+                buttons.push(
+                    [
+                        Markup.button.callback('🚚 𝗬𝗘𝗧𝗞𝗔𝗭𝗜𝗕 𝗕𝗘𝗥𝗜𝗦𝗛', `userProductsBuyGetContact`)
+                    ]
+                )
+                // }
 
                 message = await ctx.replyWithPhoto(
                     'AgACAgIAAxkBAAMQaSCeX8O-C7VDELEkGyuGEuk-EtoAAigQaxuawQhJKrUz_ZtgebsBAAMCAAN4AAM2BA',//'AgACAgIAAxkBAAIDe2j0RYX7TW88X549QLMFwtN1bIuxAAKq_zEbBd-hSzdyTF5-6IqSAQADAgADeAADNgQ', // bu yerda product.photoFileId — bu oldin saqlangan file_id
                     {
-                        caption: basket.map(p => `\n<b>${p.product.name}</b>\n ${p.product.price} ${p.product.criterion} / so'm\n${p.product.criterion === Criterion.kg ? `Kgmi: ${p.amount.toFixed(2)}` : p.product.criterion === Criterion.dona ? `Soni: ${p.amount}` : `Litri: ${p.amount}`}\nUmumiy: ${(p.product.price * p.amount).toFixed(2)} so'm`).join('\n') + `\n\n hozirda umumiy xarid narxi ${priceAll.toFixed(2)} so'm ${priceAll < 40_000 ? `\n eng kamida 40 000 so\'mlik maxsulotlar olinsa buyutrmani tasdiqlash imkoni ochiladi iltimos yana ${40000 - priceAll} so'mlik haxsulot qo'shing` : ''}`,
+                        caption: basket.map(p => `\n<b>${p.product.name}</b>\n ${p.product.price} ${p.product.criterion} / so'm\n${p.product.criterion === Criterion.kg ? `Kgmi: ${p.amount.toFixed(2)}` : p.product.criterion === Criterion.dona ? `Soni: ${p.amount}` : `Litri: ${p.amount}`}\nUmumiy: ${(p.product.price * p.amount).toFixed(2)} so'm`).join('\n') + `\n\n hozirda umumiy xarid narxi ${priceAll.toFixed(2)} so'm \nyetkazib berish narxi 2 990 so\'m${priceAll < 40_000 ? `\n eng kamida 40 000 so\'mlik maxsulotlar olinsa buyutrmani tasdiqlash imkoni ochiladi iltimos yana ${40000 - priceAll} so'mlik haxsulot qo'shing` : ''}`,
                         parse_mode: 'HTML',
                         reply_markup: Markup.inlineKeyboard(buttons).reply_markup,
                     }
@@ -244,7 +244,7 @@ export class BotUpdate {
             return;
         }
 
-        isworkTime = !isworkTime;
+        isworkTime = true;
 
         await ctx.editMessageMedia(
             {
@@ -549,7 +549,7 @@ export class BotUpdate {
             {
                 type: 'photo',
                 media: product.photo,
-                caption: `edit qilish uchun nomi narxi tasnif yoz\n\nnomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}\ntarif: ${product.description}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
+                caption: `edit qilish uchun nomi narxi tasnif yoz\n\nnomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}${product.description ? `\ntarif: ${product.description}` : ''}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
                 parse_mode: 'HTML', // kerak bo‘lsa
             },
             {
@@ -799,7 +799,7 @@ export class BotUpdate {
             {
                 type: 'photo',
                 media: product.photo,
-                caption: `nomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}\ntarif: ${product.description}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
+                caption: `nomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}${product.description ? `\ntarif: ${product.description}` : ''}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
                 parse_mode: 'HTML', // kerak bo‘lsa
             },
             {
@@ -1125,18 +1125,18 @@ export class BotUpdate {
             ]
 
         ]
-        if (priceAll >= 40000) {
-            buttons.push(
-                [
-                    Markup.button.callback('🚚 𝗬𝗘𝗧𝗞𝗔𝗭𝗜𝗕 𝗕𝗘𝗥𝗜𝗦𝗛', `userProductsBuyGetContact`)
-                ]
-            )
-        }
+        // if (priceAll >= 40000) {
+        buttons.push(
+            [
+                Markup.button.callback('🚚 𝗬𝗘𝗧𝗞𝗔𝗭𝗜𝗕 𝗕𝗘𝗥𝗜𝗦𝗛', `userProductsBuyGetContact`)
+            ]
+        )
+        // }
 
         const message = await ctx.replyWithPhoto(
             'AgACAgIAAxkBAAMQaSCeX8O-C7VDELEkGyuGEuk-EtoAAigQaxuawQhJKrUz_ZtgebsBAAMCAAN4AAM2BA',//'AgACAgIAAxkBAAIDe2j0RYX7TW88X549QLMFwtN1bIuxAAKq_zEbBd-hSzdyTF5-6IqSAQADAgADeAADNgQ', // bu yerda product.photoFileId — bu oldin saqlangan file_id
             {
-                caption: basket.map(p => `\n<b>${p.product.name}</b>\nNarxi: ${p.product.price} so'm\n${p.product.criterion === Criterion.kg ? `Kgmi: ${p.amount.toFixed(2)}` : p.product.criterion === Criterion.dona ? `Soni: ${p.amount}` : `Litri: ${p.amount}`}\nUmumiy: ${(p.product.price * p.amount).toFixed(2)} so'm`).join('\n') + `\n\n hozirda umumiy xarid narxi ${priceAll.toFixed(2)} so'm ${priceAll < 40_000 ? `\n eng kamida 40 000 so\'mlik maxsulotlar olinsa buyutrmani tasdiqlash imkoni ochiladi iltimos yana ${40000 - priceAll} so'mlik haxsulot qo'shing` : ''}`,
+                caption: basket.map(p => `\n<b>${p.product.name}</b>\nNarxi: ${p.product.price} so'm\n${p.product.criterion === Criterion.kg ? `Kgmi: ${p.amount.toFixed(2)}` : p.product.criterion === Criterion.dona ? `Soni: ${p.amount}` : `Litri: ${p.amount}`}\nUmumiy: ${(p.product.price * p.amount).toFixed(2)} so'm`).join('\n') + `\n\n hozirda umumiy xarid narxi ${priceAll.toFixed(2)} so'm \nyetkazib berish narxi 2 990 so\'m ${priceAll < 40_000 ? `\n eng kamida 40 000 so\'mlik maxsulotlar olinsa buyutrmani tasdiqlash imkoni ochiladi iltimos yana ${40000 - priceAll} so'mlik haxsulot qo'shing` : ''}`,
                 parse_mode: 'HTML',
                 reply_markup: Markup.inlineKeyboard(buttons).reply_markup,
             }
@@ -1426,9 +1426,9 @@ export class BotUpdate {
                 [
                     Markup.button.callback("✅ yetkazildiga o'zgartirish !!!", `productDeliveryy_${userId}_${messageId}`)
                 ],
-                // [
-                //     Markup.button.callback("foydalanuvchiga xabar yuborish", `sendMessageToUser_${userId}_${messageId}`)
-                // ]
+                [
+                    Markup.button.callback("foydalanuvchiga xabar yuborish", `sendMessageToUser_${userId}_${messageId}`)
+                ]
             ]).reply_markup  // <- shuni ishlatish kerak TypeScript uchun
         );
 
@@ -1581,15 +1581,18 @@ export class BotUpdate {
             Markup.inlineKeyboard([
                 _messageId
                     ?
-                    [
-                        Markup.button.callback(
-                            "✅ yetkazilmoqdaga o'zgartirish",
-                            `productDelivery_${chatId}_${_messageId}`
-                        )
-                    ]
-                    // [
-                    //     Markup.button.callback("✅ yetkazildiga o'zgartirish !!!", `productDeliveryy_${userId}_${_messageId}`)
-                    // ]
+                    baskets.has(+userId)
+                        ?
+                        [
+                            Markup.button.callback(
+                                "✅ yetkazilmoqdaga o'zgartirish",
+                                `productDelivery_${userId}_${_messageId}`
+                            )
+                        ] :
+
+                        [
+                            Markup.button.callback("✅ yetkazildiga o'zgartirish !!!", `productDeliveryy_${userId}_${_messageId}`)
+                        ]
                     :
                     []
                 // Markup.button.callback("foydalanuvchiga xabar yuborish", `sendMessageToUser_${userOrAdmin.adminOrUser!.chatId}`)
@@ -1946,36 +1949,63 @@ export class BotUpdate {
 
     @Action(/userProductsBuyGetContact/)
     async userProductsBuyGetContact(@Ctx() ctx: Context) {
-        await alertToUserAboutNotWorking(ctx);
 
         const chatId = ctx.chat?.id;
         if (!chatId) {
             console.log('chatId aniqlanmadi');
             return;
         }
-        userAction.set(chatId, {
-            chatId,
-            // productId: +productId,
-            method: 'getContact'
-        });
 
-        await ctx.editMessageMedia(
-            {
-                type: 'photo',   // media turi majburiy!
-                media: 'AgACAgIAAxkBAAMRaSCeftW743w2M6zVSvLmu2MSsr4AAikQaxuawQhJqyQNYGo38SoBAAMCAAN4AAM2BA',//'AgACAgIAAxkBAAIIEWkQJ5GqpLEAAQGiTmbLO6g_d_L1OAACbwtrGzrKgEhEW823n7ba5QEAAwIAA3gAAzYE',
-                caption: `\n<b>🏠 𝐌𝐚𝐧𝐳𝐢𝐥 𝐯𝐚 📞 𝐓𝐞𝐥𝐞𝐟𝐨𝐧 𝐫𝐚𝐪𝐚𝐦 𝐦𝐚’𝐥𝐮𝐦𝐨𝐭𝐥𝐚𝐫𝐧𝐢 𝐤𝐢𝐫𝐢𝐭𝐢𝐧𝐠</b>`,
-                // caption: `<b>‼️ 𝐘𝐞𝐭𝐤𝐚𝐳𝐢𝐛 𝐛𝐞𝐫𝐢𝐬𝐡 𝐮𝐜𝐡𝐮𝐧 𝐪𝐮𝐲𝐢𝐝𝐚𝐠𝐢𝐥𝐚𝐫𝐧𝐢 𝐲𝐨𝐳𝐢𝐧:</b>\n🏠 𝐌𝐚𝐧𝐳𝐢𝐥:\n📞 𝐓𝐞𝐥𝐞𝐟𝐨𝐧:\n𝐒𝐡𝐮𝐧𝐝𝐚𝐧 𝐬𝐨‘𝐧𝐠 𝐛𝐢𝐳𝐧𝐢𝐧𝐠 𝐤𝐮𝐫𝐲𝐞𝐫𝐥𝐚𝐫 🚚 𝐛𝐮𝐲𝐮𝐫𝐭𝐦𝐚𝐧𝐠𝐢𝐳𝐧𝐢 𝐞𝐬𝐡𝐢𝐠𝐢𝐧𝐠𝐢𝐳𝐠𝐚𝐜𝐡𝐚 𝐲𝐞𝐭𝐤𝐚𝐳𝐚𝐝𝐢! ✨`,
-                parse_mode: 'HTML',
-            },
-            {
-                reply_markup: Markup.inlineKeyboard([
-                    [
-                        Markup.button.callback('🔙 𝐎𝐫𝐪𝐚𝐠𝐚', 'userMenu'),
-                        Markup.button.callback(`🏠𝐁𝐨𝐬𝐡𝐦𝐞𝐧𝐲𝐮`, `userMenu`),
-                    ]
-                ]).reply_markup,
-            }
-        );
+        const basket = baskets.get(chatId);
+        if (!basket) {
+            await ctx.answerCbQuery(
+                'yetkazish uchun hech qanday maxsulot olmagansiz.\nIltimos yetkazish tugmasini bosishdan olding kamida 40 000 so\'mlik maxsulot oling',
+                { show_alert: true }
+            );
+            await this.userStart(ctx);
+            return;
+        }
+        const priceAll = basket.reduce((result, p) => {
+            result += p.product.price * p.amount;
+            return result;
+        }, 0)//+= p.product.price * p.amount;
+
+        if (priceAll > 40_000) {
+            await alertToUserAboutNotWorking(ctx);
+
+            userAction.set(chatId, {
+                chatId,
+                // productId: +productId,
+                method: 'getContact'
+            });
+            
+            await ctx.editMessageMedia(
+                {
+                    type: 'photo',   // media turi majburiy!
+                    media: 'AgACAgIAAxkBAAMRaSCeftW743w2M6zVSvLmu2MSsr4AAikQaxuawQhJqyQNYGo38SoBAAMCAAN4AAM2BA',//'AgACAgIAAxkBAAIIEWkQJ5GqpLEAAQGiTmbLO6g_d_L1OAACbwtrGzrKgEhEW823n7ba5QEAAwIAA3gAAzYE',
+                    caption: `\n<b>🏠 𝐌𝐚𝐧𝐳𝐢𝐥 𝐯𝐚 📞 𝐓𝐞𝐥𝐞𝐟𝐨𝐧 𝐫𝐚𝐪𝐚𝐦 𝐦𝐚’𝐥𝐮𝐦𝐨𝐭𝐥𝐚𝐫𝐧𝐢 𝐤𝐢𝐫𝐢𝐭𝐢𝐧𝐠</b>`,
+                    // caption: `<b>‼️ 𝐘𝐞𝐭𝐤𝐚𝐳𝐢𝐛 𝐛𝐞𝐫𝐢𝐬𝐡 𝐮𝐜𝐡𝐮𝐧 𝐪𝐮𝐲𝐢𝐝𝐚𝐠𝐢𝐥𝐚𝐫𝐧𝐢 𝐲𝐨𝐳𝐢𝐧:</b>\n🏠 𝐌𝐚𝐧𝐳𝐢𝐥:\n📞 𝐓𝐞𝐥𝐞𝐟𝐨𝐧:\n𝐒𝐡𝐮𝐧𝐝𝐚𝐧 𝐬𝐨‘𝐧𝐠 𝐛𝐢𝐳𝐧𝐢𝐧𝐠 𝐤𝐮𝐫𝐲𝐞𝐫𝐥𝐚𝐫 🚚 𝐛𝐮𝐲𝐮𝐫𝐭𝐦𝐚𝐧𝐠𝐢𝐳𝐧𝐢 𝐞𝐬𝐡𝐢𝐠𝐢𝐧𝐠𝐢𝐳𝐠𝐚𝐜𝐡𝐚 𝐲𝐞𝐭𝐤𝐚𝐳𝐚𝐝𝐢! ✨`,
+                    parse_mode: 'HTML',
+                },
+                {
+                    reply_markup: Markup.inlineKeyboard([
+                        [
+                            Markup.button.callback('🔙 𝐎𝐫𝐪𝐚𝐠𝐚', 'userMenu'),
+                            Markup.button.callback(`🏠𝐁𝐨𝐬𝐡𝐦𝐞𝐧𝐲𝐮`, `userMenu`),
+                        ]
+                    ]).reply_markup,
+                }
+            );
+            return;
+        } else {
+            await ctx.answerCbQuery(
+                'haridingiz qiymati 40 000 so\'mdan kam.\nIltimos yetkazish tugmasini bosishdan olding kamida 40 000 so\'mlik maxsulot oling',
+                { show_alert: true }
+            );
+            await this.userStart(ctx);
+            return;
+        }
+
     }
 
     @Action(/cancelAddressAndPhone/)
@@ -1987,11 +2017,12 @@ export class BotUpdate {
             console.log('chatId aniqlanmadi');
             return;
         }
-        // userAction.set(chatId, {
-        //     chatId,
-        //     // productId: +productId,
-        //     method: 'getContact'
-        // });
+        
+        userAction.set(chatId, {
+            chatId,
+            // productId: +productId,
+            method: 'getContact'
+        });
 
         const basket = baskets.get(chatId)
 
@@ -2051,20 +2082,20 @@ export class BotUpdate {
                 ]
 
             ]
-            if (priceAll >= 40000) {
-                buttons.push(
-                    [
-                        Markup.button.callback('🚚 𝗬𝗘𝗧𝗞𝗔𝗭𝗜𝗕 𝗕𝗘𝗥𝗜𝗦𝗛', `userProductsBuyGetContact`)
-                    ]
-                )
-            }
+            // if (priceAll >= 40000) {
+            buttons.push(
+                [
+                    Markup.button.callback('🚚 𝗬𝗘𝗧𝗞𝗔𝗭𝗜𝗕 𝗕𝗘𝗥𝗜𝗦𝗛', `userProductsBuyGetContact`)
+                ]
+            )
+            // }
 
 
             await ctx.editMessageMedia(
                 {
                     type: 'photo',   // media turi majburiy!
                     media: 'AgACAgIAAxkBAAMQaSCeX8O-C7VDELEkGyuGEuk-EtoAAigQaxuawQhJKrUz_ZtgebsBAAMCAAN4AAM2BA',//'AgACAgIAAxkBAAIDe2j0RYX7TW88X549QLMFwtN1bIuxAAKq_zEbBd-hSzdyTF5-6IqSAQADAgADeAADNgQ',
-                    caption: basket.map(p => `\n<b>${p.product.name}</b>\nNarxi: ${p.product.price} so'm\n${p.product.criterion === Criterion.kg ? `Kgmi: ${p.amount.toFixed(2)}` : p.product.criterion === Criterion.dona ? `Soni: ${p.amount}` : `Litri: ${p.amount}`}\nUmumiy: ${(p.product.price * p.amount).toFixed(2)} so'm`).join('\n') + `\n\n hozirda umumiy xarid narxi ${priceAll.toFixed(2)} so'm ${priceAll < 40_000 ? `\n eng kamida 40 000 so\'mlik maxsulotlar olinsa buyutrmani tasdiqlash imkoni ochiladi iltimos yana ${40000 - priceAll} so'mlik haxsulot qo'shing` : ''}`,
+                    caption: basket.map(p => `\n<b>${p.product.name}</b>\nNarxi: ${p.product.price} so'm\n${p.product.criterion === Criterion.kg ? `Kgmi: ${p.amount.toFixed(2)}` : p.product.criterion === Criterion.dona ? `Soni: ${p.amount}` : `Litri: ${p.amount}`}\nUmumiy: ${(p.product.price * p.amount).toFixed(2)} so'm`).join('\n') + `\n\n hozirda umumiy xarid narxi ${priceAll.toFixed(2)} so'm \nyetkazib berish narxi 2 990 so\'m${priceAll < 40_000 ? `\n eng kamida 40 000 so\'mlik maxsulotlar olinsa buyutrmani tasdiqlash imkoni ochiladi iltimos yana ${40000 - priceAll} so'mlik haxsulot qo'shing` : ''}`,
                     parse_mode: 'HTML',
 
                 },
@@ -2280,6 +2311,19 @@ export class BotUpdate {
             if (user.method === 'markNotWorking') {
                 reasonOfPause = msg.text;
                 isworkTime = false;
+                userAction.delete(chatId);
+                const userr = await this.userService.findByChatId(chatId);
+                if (userr) {
+                    await ctx.telegram.sendPhoto(
+                        chatId,
+                        'AgACAgIAAxkBAAMVaSCfPYB3syH4lR-3vyAIZ1bEez0AAjIQaxuawQhJvFUkwxgL5HoBAAMCAAN4AAM2BA',//'AgACAgIAAxkBAAMcaOD_qPNZStYzYagYsKOuRyrkfGEAAon6MRsNbglL1Tu3OUInRkEBAAMCAAN4AAM2BA',
+                        {
+                            caption: "adminlar qo'shing yoki o'chiring",
+                            parse_mode: 'HTML',
+                            reply_markup: Markup.inlineKeyboard(menu_admin_inline_keybord(userr)).reply_markup
+                        },
+                    )
+                }
                 return;
             }
 
@@ -3203,17 +3247,21 @@ async function addOrRemoveAdminChatId(ctx: Context, userService: UserService) {
 }
 
 async function alertToUserAboutNotWorking(ctx: Context) {
-    await ctx.answerCbQuery(
-        reasonOfPause,
-        { show_alert: false }
-    );
+    if (isworkTime) {
+        await ctx.answerCbQuery(
+            reasonOfPause,
+            { show_alert: false }
+        );
+    }
 }
 
 async function alertToUserAboutNotWorkingOk(ctx: Context) {
-    await ctx.answerCbQuery(
-        reasonOfPause,
-        { show_alert: true }
-    );
+    if (isworkTime) {
+        await ctx.answerCbQuery(
+            reasonOfPause,
+            { show_alert: true }
+        );
+    }
 }
 
 async function checkCallbackQuery(ctx: Context) {
@@ -3259,7 +3307,7 @@ async function productAvailable(ctx: Context, productService: ProductService, is
         {
             type: 'photo',
             media: product.photo,
-            caption: `nomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}\ntarif: ${product.description}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
+            caption: `nomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}${product.description ? `\ntarif: ${product.description}` : ''}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
             parse_mode: 'HTML', // kerak bo‘lsa
         },
         {
@@ -3309,7 +3357,7 @@ async function productId(ctx: Context, productService: ProductService, is_edit: 
             {
                 type: 'photo',
                 media: product.photo,
-                caption: `nomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}\ntarif: ${product.description}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
+                caption: `nomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}${product.description ? `\ntarif: ${product.description}` : ''}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
                 parse_mode: 'HTML', // kerak bo‘lsa
             },
             {
@@ -3356,7 +3404,7 @@ async function productId(ctx: Context, productService: ProductService, is_edit: 
             chatId,
             product.photo,
             {
-                caption: `nomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}\ntarif: ${product.description}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
+                caption: `nomi: ${product.name}\nnarxi(so\'m): ${product.price}\no'lchov turi: ${product.criterion}${product.description ? `\ntarif: ${product.description}` : ''}\n\ndokonda ${product.isAvailable ? 'mavjud' : 'mavjud emas'}`,
                 parse_mode: 'HTML',
                 reply_markup: Markup.inlineKeyboard([
                     [
